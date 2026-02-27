@@ -2,426 +2,306 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Dropship Alert → One-Click Triage (Demo)</title>
-    <style>
-        :root {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-        }
-
-        body {
-            margin: 0;
-            background: #f6f7fb;
-            color: #111;
-        }
-
-        header {
-            padding: 18px 20px;
-            background: white;
-            border-bottom: 1px solid #e7e8ee;
-        }
-
-        h1 {
-            margin: 0 0 6px;
-            font-size: 20px;
-        }
-
-        .sub {
-            color: #555;
-            font-size: 13px;
-        }
-
-        .wrap {
-            padding: 16px 20px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-            align-items: start;
-        }
-
-        .card {
-            background: #fff;
-            border: 1px solid #e7e8ee;
-            border-radius: 12px;
-            padding: 14px;
-        }
-
-        .card h2 {
-            margin: 0 0 10px;
-            font-size: 15px;
-        }
-
-        textarea {
-            width: 100%;
-            min-height: 170px;
-            resize: vertical;
-            padding: 10px;
-            border-radius: 10px;
-            border: 1px solid #d9dbe7;
-            font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-            font-size: 12px;
-        }
-
-        .row {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            align-items: center;
-            margin-top: 10px;
-        }
-
-        button {
-            border: 0;
-            border-radius: 10px;
-            padding: 10px 12px;
-            cursor: pointer;
-            font-weight: 600;
-        }
-
-        .primary {
-            background: #2563eb;
-            color: white;
-        }
-
-        .ghost {
-            background: #eef2ff;
-            color: #1e40af;
-        }
-
-        .danger {
-            background: #dc2626;
-            color: white;
-        }
-
-        .pill {
-            display: inline-flex;
-            gap: 8px;
-            align-items: center;
-            padding: 6px 10px;
-            border-radius: 999px;
-            background: #f2f3f7;
-            font-weight: 600;
-            font-size: 12px;
-        }
-
-        .kv {
-            display: grid;
-            grid-template-columns: 120px 1fr;
-            gap: 6px 10px;
-            margin: 10px 0;
-            font-size: 13px;
-        }
-
-        .muted {
-            color: #666;
-        }
-
-        .mono {
-            font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-        }
-
-        .ok {
-            color: #0f766e;
-            font-weight: 700;
-        }
-
-        .bad {
-            color: #b91c1c;
-            font-weight: 800;
-        }
-
-        .list {
-            margin: 8px 0 0;
-            padding-left: 18px;
-        }
-
-        .list li {
-            margin: 4px 0;
-        }
-
-        .divider {
-            height: 1px;
-            background: #e7e8ee;
-            margin: 12px 0;
-        }
-
-        .result {
-            background: #0b1020;
-            color: #e9ecff;
-            border-radius: 12px;
-            padding: 12px;
-            font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-            font-size: 12px;
-            white-space: pre-wrap;
-        }
-
-        .footerNote {
-            margin-top: 10px;
-            font-size: 12px;
-            color: #666;
-        }
-
-        .upload {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-        input[type="file"] {
-            font-size: 12px;
-        }
-
-        img.preview {
-            max-width: 160px;
-            border: 1px solid #e7e8ee;
-            border-radius: 10px;
-            display: none;
-        }
-
-        a {
-            color: #2563eb;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        @media (max-width: 980px) {
-            .grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dropship Alert → One-Click Triage (Demo)</title>
+  <style>
+    :root { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; }
+    body { margin: 0; background: #f6f7fb; color: #111; }
+    header { padding: 18px 20px; background: white; border-bottom: 1px solid #e7e8ee; }
+    h1 { margin: 0 0 6px; font-size: 20px; }
+    .sub { color: #555; font-size: 13px; }
+    .wrap { padding: 16px 20px; max-width: 1100px; margin: 0 auto; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
+    .card { background: #fff; border: 1px solid #e7e8ee; border-radius: 12px; padding: 14px; }
+    .card h2 { margin: 0 0 10px; font-size: 15px; }
+    textarea {
+      width: 100%; min-height: 170px; resize: vertical; padding: 10px;
+      border-radius: 10px; border: 1px solid #d9dbe7;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px;
+    }
+    .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 10px; }
+    button { border: 0; border-radius: 10px; padding: 10px 12px; cursor: pointer; font-weight: 600; }
+    .ghost { background: #eef2ff; color: #1e40af; }
+    .danger { background: #dc2626; color: white; }
+    .pill { display: inline-flex; gap: 8px; align-items: center; padding: 6px 10px; border-radius: 999px; background: #f2f3f7; font-weight: 600; font-size: 12px; }
+    .kv { display: grid; grid-template-columns: 120px 1fr; gap: 6px 10px; margin: 10px 0; font-size: 13px; }
+    .muted { color: #666; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .ok { color: #0f766e; font-weight: 700; }
+    .bad { color: #b91c1c; font-weight: 800; }
+    .divider { height: 1px; background: #e7e8ee; margin: 12px 0; }
+    .result {
+      background: #0b1020; color: #e9ecff; border-radius: 12px; padding: 12px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; white-space: pre-wrap;
+    }
+    .footerNote { margin-top: 10px; font-size: 12px; color: #666; }
+    .upload { display: flex; gap: 10px; align-items: center; }
+    input[type="file"] { font-size: 12px; }
+    img.preview { max-width: 160px; border: 1px solid #e7e8ee; border-radius: 10px; display: none; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .hidden { display: none !important; }
+    @media (max-width: 980px) { .grid { grid-template-columns: 1fr; } }
+  </style>
 </head>
 
 <body>
-    <header>
-        <h1>Dropship Alert → One-Click Triage (Demo)</h1>
-        <div class="sub">Fake data + fake “AI labels” (no Slack API). Paste an alert → get a tight triage card + deep
-            links + next action.</div>
-    </header>
+  <header>
+    <h1>Dropship Alert → One-Click Triage (Demo)</h1>
+    <div class="sub">Fake data + fake “AI labels” (no Slack API). Paste an alert → get a tight triage card + deep links + next action.</div>
+  </header>
 
-    <div class="wrap">
-        <div class="grid">
-            <div class="card">
-                <h2>1) Slack alert (paste)</h2>
-                <textarea id="alertInput"></textarea>
+  <div class="wrap">
+    <div class="grid">
+      <!-- LEFT: Paste alert only (no Generate / Load Sample buttons) -->
+      <div class="card">
+        <h2>1) Slack alert (paste)</h2>
+        <textarea id="alertInput"></textarea>
 
-                <div class="row">
-                    <button class="primary" onclick="generate()">Generate triage</button>
-                    <button class="ghost" onclick="loadSample('unsellable')">Load sample: Unsellable</button>
-                    <button class="ghost" onclick="loadSample('address')">Load sample: Address</button>
-                </div>
+        <div class="divider"></div>
 
-                <div class="divider"></div>
+        <!-- Image upload should only appear for unsellable -->
+        <div id="imageSection" class="hidden">
+          <h2>AliExpress image search (only if unsellable)</h2>
+          <div class="upload">
+            <input id="imgInput" type="file" accept="image/*" onchange="handleImage(event)" />
+            <img id="imgPreview" class="preview" alt="preview" />
+          </div>
+          <div class="footerNote">In production this would open AliExpress image search / send image to your internal tooling.</div>
+        </div>
+      </div>
 
-                <h2>Optional: image for AliExpress search (demo)</h2>
-                <div class="upload">
-                    <input type="file" accept="image/*" onchange="handleImage(event)" />
-                    <img id="imgPreview" class="preview" alt="preview" />
-                </div>
-                <div class="footerNote">In production this would open AliExpress image search / send image to your
-                    internal tooling.</div>
-            </div>
+      <!-- RIGHT: Triage card with buttons only (no duplicate Links list) -->
+      <div class="card">
+        <h2>2) Triage card (tight)</h2>
 
-            <div class="card">
-                <h2>2) Triage card (tight)</h2>
-
-                <div class="row" style="margin-top:0;">
-                    <span class="pill">Order <span id="orderId" class="mono">—</span></span>
-                    <span class="pill">Shop <span id="shopName" class="mono">—</span></span>
-                    <span class="pill">SKU <span id="sku" class="mono">—</span></span>
-                    <span class="pill">Unit cost <span id="unitCost" class="mono">—</span></span>
-                </div>
-
-                <div class="kv">
-                    <div class="muted">Reason</div>
-                    <div id="reason" class="bad">—</div>
-                    <div class="muted">Recommendation</div>
-                    <div id="rec" style="font-weight:800;">—</div>
-                    <div class="muted">PID</div>
-                    <div><span id="pid" class="mono">—</span> <span class="muted">(deep link)</span></div>
-                </div>
-
-                <div class="divider"></div>
-
-                <div class="kv">
-                    <div class="muted">Links</div>
-                    <div>
-                        <div>• <a id="linkShopAdmin" href="#" target="_blank" rel="noreferrer">Shop Admin (update
-                                address)</a></div>
-                        <div>• <a id="linkOrderMgr" href="#" target="_blank" rel="noreferrer">Open Order Manager</a>
-                        </div>
-                        <div>• <a id="linkAli" href="#" target="_blank" rel="noreferrer">AliExpress</a></div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <button class="ghost" onclick="action('open_shop_admin')">Shop Admin</button>
-                    <button class="ghost" onclick="action('open_order_manager')">Open Order Manager</button>
-                    <button class="danger" onclick="action('request_refund')">Request refund (to Mary)</button>
-                </div>
-
-                <div class="footerNote">
-                    “AI label” here means: a classifier picks <span class="mono">unsellable_604</span> vs <span
-                        class="mono">address_flag</span> from the alert + flags.
-                </div>
-            </div>
+        <div class="row" style="margin-top:0;">
+          <span class="pill">Order <span id="orderId" class="mono">—</span></span>
+          <span class="pill">Shop <span id="shopName" class="mono">—</span></span>
+          <span class="pill">SKU <span id="sku" class="mono">—</span></span>
+          <span class="pill">Unit cost <span id="unitCost" class="mono">—</span></span>
         </div>
 
-        <div class="card" style="margin-top:14px;">
-            <h2>3) Result / case log (simulated)</h2>
-            <div id="log" class="result">Paste an alert and click “Generate triage”.</div>
+        <div class="kv">
+          <div class="muted">Reason</div>
+          <div id="reason" class="bad">—</div>
+
+          <div class="muted">Recommendation</div>
+          <div id="rec" style="font-weight:800;">—</div>
         </div>
+
+        <div class="divider"></div>
+
+        <div class="row">
+          <button class="ghost" onclick="action('open_shop_admin')">Shop Admin</button>
+          <button class="ghost" onclick="action('open_order_manager')">Open Order Manager</button>
+          <button class="ghost" id="btnAli" onclick="action('open_aliexpress')">AliExpress</button>
+          <button class="danger" onclick="action('request_refund')">Request refund (to Mary)</button>
+        </div>
+
+        <div class="footerNote">
+          “AI label” here means: a classifier picks <span class="mono">unsellable_604</span> vs <span class="mono">address_flag</span> from the alert + flags.
+        </div>
+      </div>
     </div>
 
-    <script>
-        // ---- Fake “backend” (mocked) ----
-        const MOCK = {
-            "339-445": {
-                shop: "hello_world_boutique",
-                sku: "ds-12345",
-                unitCost: "$7.50",
-                pid: "3256806747943561",
-                // pre-labeled for demo
-                reason: "address_flag (state/zip mismatch)",
-                recommendation: "Open Shop Admin → fix address → resubmit",
-            },
-            "39345-36848": {
-                shop: "feistybombshells",
-                sku: "DRS-1182-BLK-M",
-                unitCost: "$20.99",
-                pid: "PID-88910021",
-                reason: "unsellable_604 (All SKU Unsaleable)",
-                recommendation: "Search AliExpress image → find replacement → resubmit OR refund",
-            }
-        };
+    <div class="card" style="margin-top:14px;">
+      <h2>3) Result / case log (simulated)</h2>
+      <div id="log" class="result">Paste an alert to see the triage card update automatically.</div>
+    </div>
+  </div>
 
-        const SAMPLES = {
-            unsellable: `Aliexpress service has failed with message 'All SKU Unsaleable'.
+  <script>
+    // ---- Fake “backend” (mocked) ----
+    const MOCK = {
+      "339-445": {
+        shop: "hello_world_boutique",
+        sku: "ds-12345",
+        unitCost: "$7.50",
+        pid: "3256806747943561",
+        reason: "address_flag (state/zip mismatch)",
+        recommendation: "Open Shop Admin → fix address → resubmit",
+      },
+      "39345-36848": {
+        shop: "feistybombshells",
+        sku: "DRS-1182-BLK-M",
+        unitCost: "$20.99",
+        pid: "PID-88910021",
+        reason: "unsellable_604 (All SKU Unsaleable)",
+        recommendation: "AliExpress image search → find replacement → resubmit OR refund",
+      }
+    };
+
+    const SAMPLES = {
+      unsellable: `Aliexpress service has failed with message 'All SKU Unsaleable'.
 status: 604
 product_id: 3256806747943561
 ship_to_country: US`,
-            address: `Failed DS Order - 339-445
+      address: `Failed DS Order - 339-445
 Shop: hello_world_boutique
 Order ID: 339-445
 Shipping: Little Elm, Alabama 75068
 Note: state/zip mismatch (should be TX)`
+    };
+
+    // ---- “AI label” (fake): classify cause from text ----
+    function aiLabel(alertText) {
+      const t = (alertText || "").toLowerCase();
+      if (t.includes("unsaleable") || t.includes("unsellable") || t.includes("status: 604") || t.includes("604")) {
+        return {
+          type: "unsellable",
+          reason: "unsellable_604 (All SKU Unsaleable)",
+          rec: "AliExpress image search → find replacement → resubmit OR refund"
         };
+      }
+      if (t.includes("address") || t.includes("zip") || t.includes("state") || t.includes("mismatch") || t.includes("alabama 75068")) {
+        return {
+          type: "address",
+          reason: "address_flag (state/zip mismatch)",
+          rec: "Open Shop Admin → fix address → resubmit"
+        };
+      }
+      return { type: "unknown", reason: "unknown", rec: "Open Order Manager → investigate → decide resubmit/refund" };
+    }
 
-        function loadSample(which) {
-            document.getElementById("alertInput").value = SAMPLES[which] || "";
-        }
+    // ---- Extract order id from messy text (simple demo) ----
+    function parseOrderId(text) {
+      const m1 = text.match(/Order ID:\s*([0-9\-]+)/i);
+      if (m1) return m1[1].trim();
+      const m2 = text.match(/Failed DS Order\s*-\s*([0-9\-]+)/i);
+      if (m2) return m2[1].trim();
+      const m3 = text.match(/\b([0-9]{3,5}-[0-9]{2,6})\b/);
+      if (m3) return m3[1].trim();
+      return null;
+    }
 
-        // ---- “AI label” (fake): classify cause from text ----
-        function aiLabel(alertText) {
-            const t = (alertText || "").toLowerCase();
-            if (t.includes("unsaleable") || t.includes("unsellable") || t.includes("status: 604") || t.includes("604")) {
-                return { reason: "unsellable_604 (All SKU Unsaleable)", rec: "Find replacement on AliExpress (image) → resubmit OR refund" };
-            }
-            if (t.includes("address") || t.includes("zip") || t.includes("state") || t.includes("mismatch") || t.includes("alabama 75068")) {
-                return { reason: "address_flag (state/zip mismatch)", rec: "Open Shop Admin → fix address → resubmit" };
-            }
-            return { reason: "unknown", rec: "Open Order Manager → investigate → decide resubmit/refund" };
-        }
+    // ---- Auto-run triage whenever paste/typing changes (no Generate / Load Sample UI) ----
+    const alertEl = document.getElementById("alertInput");
+    alertEl.addEventListener("input", () => triageFromInput());
 
-        // ---- Extract order id from messy text (simple demo) ----
-        function parseOrderId(text) {
-            const m1 = text.match(/Order ID:\s*([0-9\-]+)/i);
-            if (m1) return m1[1].trim();
-            const m2 = text.match(/Failed DS Order\s*-\s*([0-9\-]+)/i);
-            if (m2) return m2[1].trim();
-            const m3 = text.match(/\b([0-9]{3,5}-[0-9]{2,6})\b/);
-            if (m3) return m3[1].trim();
-            return null;
-        }
+    function triageFromInput() {
+      const text = alertEl.value || "";
+      if (!text.trim()) {
+        resetCard();
+        setLog("Paste an alert to see the triage card update automatically.");
+        return;
+      }
 
-        function generate() {
-            const text = document.getElementById("alertInput").value || "";
-            const orderId = parseOrderId(text) || "339-445"; // fallback so demo always works
+      const orderId = parseOrderId(text) || "339-445"; // fallback so demo always works
+      const fromAI = aiLabel(text);
 
-            const fromAI = aiLabel(text);
-            const backend = MOCK[orderId] || {
-                shop: "hello_world_boutique",
-                sku: "ds-12345",
-                unitCost: "$7.50",
-                pid: "3256806747943561",
-                reason: fromAI.reason,
-                recommendation: fromAI.rec
-            };
+      const backend = MOCK[orderId] || {
+        shop: "hello_world_boutique",
+        sku: "ds-12345",
+        unitCost: "$7.50",
+        pid: "3256806747943561",
+      };
 
-            // Populate card
-            setText("orderId", orderId);
-            setText("shopName", backend.shop);
-            setText("sku", backend.sku);
-            setText("unitCost", backend.unitCost);
-            setText("pid", backend.pid);
-            setText("reason", backend.reason, true);
-            setText("rec", backend.recommendation);
+      // Populate card fields
+      setText("orderId", orderId);
+      setText("shopName", backend.shop);
+      setText("sku", backend.sku);
+      setText("unitCost", backend.unitCost);
 
-            // Deep links (fake URLs for demo)
-            document.getElementById("linkShopAdmin").href = `https://admin.example/shops/${encodeURIComponent(backend.shop)}/address`;
-            document.getElementById("linkOrderMgr").href = `https://internal.example/orders/${encodeURIComponent(orderId)}`;
-            document.getElementById("linkAli").href = `https://www.aliexpress.com/wholesale?SearchText=${encodeURIComponent(backend.pid)}`;
+      // Force UI to show AI calculation (your requested override)
+      setText("reason", fromAI.reason, true);
+      setText("rec", fromAI.rec);
 
-            // Case log
-            const lines = [];
-            lines.push(`[CASE OPENED] ${new Date().toLocaleString()}`);
-            lines.push(`order=${orderId} shop=${backend.shop} sku=${backend.sku} pid=${backend.pid}`);
-            lines.push(`[AI LABEL] reason="${fromAI.reason}" → recommendation="${fromAI.rec}"`);
-            lines.push(`[NEXT] Use buttons: Shop Admin / Order Manager / Request refund (to Mary)`);
-            setLog(lines.join("\n"));
-        }
+      // Deep links (stored for button actions)
+      window.__links = {
+        shopAdmin: `https://admin.example/shops/${encodeURIComponent(backend.shop)}/address`,
+        orderMgr: `https://internal.example/orders/${encodeURIComponent(orderId)}`,
+        ali: `https://www.aliexpress.com/wholesale?SearchText=${encodeURIComponent(backend.pid)}`
+      };
 
-        function action(type) {
-            const orderId = document.getElementById("orderId").textContent;
-            const shop = document.getElementById("shopName").textContent;
-            const sku = document.getElementById("sku").textContent;
-            const pid = document.getElementById("pid").textContent;
+      // Show Ali button + image upload only when unsellable
+      const showUnsellable = (fromAI.type === "unsellable");
+      document.getElementById("btnAli").classList.toggle("hidden", !showUnsellable);
+      document.getElementById("imageSection").classList.toggle("hidden", !showUnsellable);
 
-            const lines = [];
-            lines.push(`[ACTION] ${type} @ ${new Date().toLocaleTimeString()}`);
-            if (type === "request_refund") {
-                lines.push(`Message to Mary: "Please refund order ${orderId} (SKU ${sku}). Reason: ${document.getElementById("reason").textContent}"`);
-                lines.push(`(Demo) In production: create refund ticket + notify in Slack thread.`);
-            } else if (type === "open_shop_admin") {
-                lines.push(`Open Shop Admin for ${shop} → fix address → resubmit`);
-            } else if (type === "open_order_manager") {
-                lines.push(`Open Order Manager for ${orderId} → update partner order id / resubmit`);
-            }
-            lines.push(`Context: pid=${pid}`);
-            setLog(lines.join("\n"));
-        }
+      // If we switch away from unsellable, clear the image preview
+      if (!showUnsellable) clearImage();
 
-        function handleImage(evt) {
-            const f = evt.target.files && evt.target.files[0];
-            if (!f) return;
-            const url = URL.createObjectURL(f);
-            const img = document.getElementById("imgPreview");
-            img.src = url;
-            img.style.display = "block";
-            setLog(`[IMAGE] Loaded "${f.name}"\n(Demo) Next: open AliExpress image search with this image.`);
-        }
+      // Case log
+      const lines = [];
+      lines.push(`[CASE OPENED] ${new Date().toLocaleString()}`);
+      lines.push(`order=${orderId} shop=${backend.shop} sku=${backend.sku}`);
+      lines.push(`[AI LABEL] type="${fromAI.type}" reason="${fromAI.reason}"`);
+      lines.push(`[NEXT] Use buttons: Shop Admin / Order Manager / ${showUnsellable ? "AliExpress / " : ""}Request refund (to Mary)`);
+      setLog(lines.join("\n"));
+    }
 
-        function setText(id, val, red = false) {
-            const el = document.getElementById(id);
-            el.textContent = val ?? "—";
-            if (id === "reason") {
-                el.className = red ? "bad" : "ok";
-            }
-        }
-        function setLog(text) { document.getElementById("log").textContent = text; }
+    function resetCard() {
+      setText("orderId", "—");
+      setText("shopName", "—");
+      setText("sku", "—");
+      setText("unitCost", "—");
+      setText("reason", "—", true);
+      setText("rec", "—");
+      document.getElementById("btnAli").classList.add("hidden");
+      document.getElementById("imageSection").classList.add("hidden");
+      clearImage();
+      window.__links = null;
+    }
 
-        // start with a sample to avoid empty screen
-        loadSample("unsellable");
-    </script>
+    function action(type) {
+      const links = window.__links || {};
+      const orderId = document.getElementById("orderId").textContent;
+      const shop = document.getElementById("shopName").textContent;
+      const sku = document.getElementById("sku").textContent;
+
+      const lines = [];
+      lines.push(`[ACTION] ${type} @ ${new Date().toLocaleTimeString()}`);
+
+      if (type === "request_refund") {
+        lines.push(`Message to Mary: "Please refund order ${orderId} (SKU ${sku}). Reason: ${document.getElementById("reason").textContent}"`);
+        lines.push(`(Demo) In production: create refund ticket + notify in Slack thread.`);
+      } else if (type === "open_shop_admin") {
+        lines.push(`Open Shop Admin for ${shop} → fix address → resubmit`);
+        if (links.shopAdmin) window.open(links.shopAdmin, "_blank", "noreferrer");
+      } else if (type === "open_order_manager") {
+        lines.push(`Open Order Manager for ${orderId} → resubmit / update partner order id`);
+        if (links.orderMgr) window.open(links.orderMgr, "_blank", "noreferrer");
+      } else if (type === "open_aliexpress") {
+        lines.push(`Open AliExpress → use image search to find exact/replacement item`);
+        if (links.ali) window.open(links.ali, "_blank", "noreferrer");
+      }
+
+      setLog(lines.join("\n"));
+    }
+
+    function handleImage(evt) {
+      const f = evt.target.files && evt.target.files[0];
+      if (!f) return;
+      const url = URL.createObjectURL(f);
+      const img = document.getElementById("imgPreview");
+      img.src = url;
+      img.style.display = "block";
+      setLog(`[IMAGE] Loaded "${f.name}"\n(Demo) Next: open AliExpress image search with this image.`);
+    }
+
+    function clearImage() {
+      const imgInput = document.getElementById("imgInput");
+      if (imgInput) imgInput.value = "";
+      const img = document.getElementById("imgPreview");
+      img.src = "";
+      img.style.display = "none";
+    }
+
+    function setText(id, val, red = false) {
+      const el = document.getElementById(id);
+      el.textContent = val ?? "—";
+      if (id === "reason") {
+        el.className = red ? "bad" : "ok";
+      }
+    }
+    function setLog(text) { document.getElementById("log").textContent = text; }
+
+    // Start with a sample (no sample buttons shown)
+    alertEl.value = SAMPLES.unsellable;
+    triageFromInput();
+  </script>
 </body>
 
 </html>
